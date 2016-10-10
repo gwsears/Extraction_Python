@@ -12,7 +12,6 @@ baseURL = "https://api.cilabs.net/v1/conferences/ws16/info/attendees?limit=50&pa
 firstPage = 1
 lastPage = 672
 pageNum = firstPage
-targetURL = baseURL + str(pageNum)
 
 # Open/create csvfile and prep for writing
 csvFile = open("attendees_scrape.csv", 'w+', encoding='utf-8', newline='')
@@ -21,6 +20,7 @@ outputWriter.writerow(['Name','Title','Company','Country','About','ID','Image'])
 
 content = True
 while content == True: #As long as we are getting content continue to loop.
+    targetURL = baseURL + str(pageNum)
     r = requests.get(targetURL, auth=('user', 'pass'))
     page = r.json()
     listAttend = page['attendees']
